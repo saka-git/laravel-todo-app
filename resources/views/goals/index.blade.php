@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@push('styles')
+<link rel="stylesheet" href="{{ asset('/css/style.css')  }}">
+@endpush
+
+@push('scripts')
+<script src="{{ asset('/js/script.js') }}"></script>
+@endpush
+
 @section('content')
 <div class="container h-100">
   @if ($errors->any())
@@ -15,10 +23,18 @@
   <!-- 目標の追加用モーダル -->
   @include('modals.add_goal')
 
+  <!-- タグの追加用モーダル -->
+  @include('modals.add_tag')
+
   <div class="d-flex mb-3">
     <a href="#" class="link-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#addGoalModal">
       <div class="d-flex align-items-center">
         <span class="fs-5 fw-bold">＋</span>&nbsp;目標の追加
+      </div>
+    </a>
+    <a href="#" class="ms-4 link-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#addTagModal">
+      <div class="d-flex align-items-center">
+        <span class="fs-5 fw-bold">＋</span>&nbsp;タグの追加
       </div>
     </a>
   </div>
@@ -100,6 +116,11 @@
               </div>
             </div>
             <h6 class="card-subtitle ms-1 mb-1 text-muted">{{ $todo->created_at }}</h6>
+            <div class="d-flex flex-wrap mx-1 mb-1">
+              @foreach ($todo->tags()->orderBy('id', 'asc')->get() as $tag)
+              <span class="badge bg-secondary mt-2 me-2 fw-light">{{ $tag->name }}</span>
+              @endforeach
+            </div>
           </div>
         </div>
         @endforeach
