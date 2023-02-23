@@ -14,7 +14,11 @@ Add people のボタンから招待を送ってもらう。
 
 ### 3.外部ファイルのインストール
 
-ターミナルで　 npm install
+ターミナルで
+
+composer install
+
+npm install
 
 ### 4..env ファイルの修正
 
